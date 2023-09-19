@@ -1,0 +1,15 @@
+version: '3.8'
+volumes:
+  backend-gateway-project-folder-v2:
+services:
+  backend-gateway-project-v2:
+    build: .
+    # restart: always
+    ports:
+      - '8100:8080'
+    # environment:
+    #   - POSTGRES_HOST=database-pgbouncer
+    #   - POSTGRES_PORT=6432
+    volumes:
+      - backend-gateway-project-folder-v2:/project-folder-v2
+      - ./.env:/project-folder-v2/.env

@@ -1,0 +1,9 @@
+# docker/app/Dockerfile
+FROM amazon/aws-lambda-python:3.9
+WORKDIR /project-folder-v2
+COPY ./requirements.txt /project-folder-v2/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /project-folder-v2/requirements.txt
+COPY ./app /project-folder-v2
+COPY ./src /project-folder-v2/src
+RUN export PYTHONPATH=${PYTHONPATH}:/project-folder-v2 
+ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--header", "server:RenosData"]
